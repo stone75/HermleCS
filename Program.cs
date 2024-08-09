@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HermleCS.Comm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,10 @@ namespace HermleCS
         [STAThread]
         static void Main()
         {
+            PLCCommModule plccomm = PLCCommModule.Instance;
+            plccomm.sendMessage();
+            plccomm.readMessage();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
