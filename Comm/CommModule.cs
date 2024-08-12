@@ -10,6 +10,7 @@ namespace HermleCS.Comm
     {
         public abstract string readMessage();
         public abstract void sendMessage();
+        public abstract string test();
     }
 }
 
