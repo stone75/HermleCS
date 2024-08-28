@@ -8,8 +8,8 @@ namespace HermleCS.Comm
 {
     public abstract class CommModule
     {
-        public abstract string readMessage();
-        public abstract void sendMessage();
+        public abstract bool readMessage(string deviceid, out string readVal);
+        public abstract bool sendMessage(string deviceid, short val);
         public abstract string test();
     }
 }

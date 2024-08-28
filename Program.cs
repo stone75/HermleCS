@@ -15,13 +15,6 @@ namespace HermleCS
         [STAThread]
         static void Main()
         {
-            PLCCommModule plccomm = PLCCommModule.Instance;
-            plccomm.init();
-            plccomm.sendMessage();
-            plccomm.readMessage();
-            plccomm.test();
-            plccomm.destroy();
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

@@ -16,5 +16,11 @@ namespace HermleCS
         {
             InitializeComponent();
         }
+
+        private void btnMXComponent_Click(object sender, EventArgs e)
+        {
+            formMXComponent frm = new formMXComponent();
+            frm.ShowDialog();
+        }
     }
 }

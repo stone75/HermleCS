@@ -9,14 +9,14 @@ using ActUtlTypeLib;
 
 namespace HermleCS.Comm
 {
-    public class PLCCommModule : CommModule
+    public class CommMXComponent : CommModule
     {
-        private static readonly PLCCommModule instance = new PLCCommModule();
-        private PLCCommModule() { }
+        private static readonly CommMXComponent instance = new CommMXComponent();
+        private CommMXComponent() { }
 
         private ActUtlType plc;
 
-        public static PLCCommModule Instance
+        public static CommMXComponent Instance
         {
             get
             {
@@ -24,12 +24,14 @@ namespace HermleCS.Comm
             }
         }
 
-        public bool init()
+        public bool init(int number)
         {
             plc = new ActUtlType();
-            plc.ActLogicalStationNumber = 1;
+            plc.ActLogicalStationNumber = number;
             string hex = "0x";
             int result;
+
+            Console.WriteLine("Init..............");
 
             try
             {
@@ -49,6 +51,8 @@ namespace HermleCS.Comm
 
         public bool destroy()
         {
+            Console.WriteLine("Destroy..............");
+
             try
             {
                 plc.Close();
@@ -62,20 +66,45 @@ namespace HermleCS.Comm
             return true;
         }
 
-        public override string readMessage()
+        public override bool readMessage(string deviceid, out string readVal)
         {
             Console.WriteLine("readMessage..............");
-            MessageBox.Show("readMessage");
 
-            return "";
-            // throw new NotImplementedException();
+            int retCode;
+            short rVal = -1;
+
+            try
+            {
+                retCode = plc.ReadDeviceRandom2(deviceid, 1, out rVal);
+                readVal = "0x" + rVal;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                readVal = "Err : " + e.Message;
+                return false;
+            }
+
+            return true;
         }
 
-        public override void sendMessage()
+        public override bool sendMessage(string deviceid, short val)
         {
             Console.WriteLine("sendMessage..............");
-            MessageBox.Show("sendMessage");
-            // throw new NotImplementedException();
+
+            int retCode;
+
+            try
+            {
+                retCode = plc.WriteDeviceRandom2(deviceid, 1, ref val);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+
+            return true;
         }
 
         public override string test()

@@ -28,13 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.btnMXComponent = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // btnMXComponent
+            // 
+            this.btnMXComponent.Location = new System.Drawing.Point(529, 37);
+            this.btnMXComponent.Name = "btnMXComponent";
+            this.btnMXComponent.Size = new System.Drawing.Size(225, 63);
+            this.btnMXComponent.TabIndex = 0;
+            this.btnMXComponent.Text = "MX Component 로 통신";
+            this.btnMXComponent.UseVisualStyleBackColor = true;
+            this.btnMXComponent.Click += new System.EventHandler(this.btnMXComponent_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnMXComponent);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnMXComponent;
     }
 }
 
