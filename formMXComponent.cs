@@ -106,7 +106,7 @@ namespace HermleCS
                 return;
             }
 
-            bool rval = plccomm.sendMessage(txtDeviceID.Text, (short)iValue);
+            bool rval = plccomm.sendMessage(txtDeviceID.Text, 1, (short)iValue);
             if (rval)
             {
                 MessageBox.Show("성공",
@@ -125,7 +125,7 @@ namespace HermleCS
         {
             string value;
 
-            bool rval = plccomm.readMessage(txtDeviceID.Text, out value);
+            bool rval = plccomm.readMessage(txtDeviceID.Text, 1, out value);
             if (rval)
             {
                 MessageBox.Show("성공",

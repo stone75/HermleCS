@@ -66,7 +66,7 @@ namespace HermleCS.Comm
             return true;
         }
 
-        public override bool readMessage(string deviceid, out string readVal)
+        public override bool readMessage(string deviceid, int length, out string readVal)
         {
             Console.WriteLine("readMessage..............");
 
@@ -75,7 +75,7 @@ namespace HermleCS.Comm
 
             try
             {
-                retCode = plc.ReadDeviceRandom2(deviceid, 1, out rVal);
+                retCode = plc.ReadDeviceRandom2(deviceid, length, out rVal);
                 readVal = "0x" + rVal;
             }
             catch (Exception e)
@@ -88,7 +88,7 @@ namespace HermleCS.Comm
             return true;
         }
 
-        public override bool sendMessage(string deviceid, short val)
+        public override bool sendMessage(string deviceid, int length, int[] val)
         {
             Console.WriteLine("sendMessage..............");
 
@@ -96,7 +96,7 @@ namespace HermleCS.Comm
 
             try
             {
-                retCode = plc.WriteDeviceRandom2(deviceid, 1, ref val);
+                retCode = plc.WriteDeviceRandom(deviceid, length, ref val[0]);
             }
             catch (Exception e)
             {
