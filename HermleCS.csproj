@@ -52,6 +52,7 @@
     <Compile Include="Comm\C.cs" />
     <Compile Include="Comm\CommModule.cs" />
     <Compile Include="Comm\CommMXComponent.cs" />
+    <Compile Include="Comm\CommHTTPComponent.cs" />
     <Compile Include="Comm\CommTCPComponent.cs" />
     <Compile Include="Data\D.cs" />
     <Compile Include="Data\Struct.cs" />
@@ -60,6 +61,12 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formHTTPComponent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formHTTPComponent.Designer.cs">
+      <DependentUpon>formHTTPComponent.cs</DependentUpon>
     </Compile>
     <Compile Include="formMXComponent.cs">
       <SubType>Form</SubType>
@@ -71,6 +78,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formHTTPComponent.resx">
+      <DependentUpon>formHTTPComponent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formMXComponent.resx">
       <DependentUpon>formMXComponent.cs</DependentUpon>

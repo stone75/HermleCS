@@ -22,5 +22,11 @@ namespace HermleCS
             formMXComponent frm = new formMXComponent();
             frm.ShowDialog();
         }
+
+        private void btnHTTPConnection_Click(object sender, EventArgs e)
+        {
+            formHTTPComponent frm = new formHTTPComponent();
+            frm.ShowDialog();
+        }
     }
 }

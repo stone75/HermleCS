@@ -85,6 +85,7 @@ namespace HermleCS
 
         private void btnWrite_Click(object sender, EventArgs e)
         {
+            /*
             if (txtWriteValue.Text == "")
             {
                 MessageBox.Show("값을 입력해주세요",
@@ -106,7 +107,7 @@ namespace HermleCS
                 return;
             }
 
-            bool rval = plccomm.sendMessage(txtDeviceID.Text, 1, (short)iValue);
+            bool rval = plccomm.sendMessage(txtDeviceID.Text, 1, (int)iValue);
             if (rval)
             {
                 MessageBox.Show("성공",
@@ -119,6 +120,7 @@ namespace HermleCS
                           Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            */
         }
 
         private void btnRead_Click(object sender, EventArgs e)

@@ -136,7 +136,7 @@ namespace HermleCS.Comm
 
             return true;
         }
-
+        /*
         private async void writeBlock(string deviceid, int length, )
         {
             buffer = null;
@@ -171,9 +171,10 @@ namespace HermleCS.Comm
                 Console.WriteLine(ex.ToString());
             }
         }
-
+        */
         public override bool sendMessage(string deviceid, int length, int[] val)
         {
+            /*
             Console.WriteLine("sendMessage..............");
 
             int retCode;
@@ -187,12 +188,13 @@ namespace HermleCS.Comm
                 Console.WriteLine(e.Message);
                 return false;
             }
-
+            */
             return true;
         }
 
         public override string test()
         {
+            /*
             Console.WriteLine("Comm Module Test..........");
 
             string ret;
@@ -208,6 +210,8 @@ namespace HermleCS.Comm
             }
 
             return ret;
+            */
+            return "";
         }
     }
 }
