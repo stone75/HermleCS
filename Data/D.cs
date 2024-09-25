@@ -50,9 +50,9 @@ namespace HermleCS.Data
             }
         }
 
-        public int ReadPocketsLocations(string arrayname)
+        public int ReadPocketsLocations(string toolname, string type)
         {
-            if (arrayname != "RoundLocations")
+            if (toolname != "RoundLocations")
             {
                 return C.ERRNO_FAILED;
             }
@@ -66,7 +66,7 @@ namespace HermleCS.Data
             try
             {
                 //                filePath = Path.Combine(C.ApplicationPath, "WorkDirectory", "Data", arrayname, ".csv");
-                filePath = Path.Combine(C.ApplicationPath, "CSV", arrayname, ".csv");
+                filePath = Path.Combine(C.ApplicationPath, "CSV", toolname, type, ".csv");
 
                 using (StreamReader reader = new StreamReader(filePath))
                 {
