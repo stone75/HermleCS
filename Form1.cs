@@ -28,5 +28,11 @@ namespace HermleCS
             formHTTPComponent frm = new formHTTPComponent();
             frm.ShowDialog();
         }
+
+        private void btnCSVTest_Click(object sender, EventArgs e)
+        {
+            formCSVTest frm = new formCSVTest();
+            frm.ShowDialog();
+        }
     }
 }

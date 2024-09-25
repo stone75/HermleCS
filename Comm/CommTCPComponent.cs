@@ -36,8 +36,9 @@ namespace HermleCS.Comm
         }
 
         public bool init(string ip, int port)
-        //        public async void init(string ip, int port)
+        // public async void init(string ip, int port)
         {
+            C.log("McProtocol Init...");
             IP = ip;
             Port = port;
 
@@ -49,12 +50,12 @@ namespace HermleCS.Comm
                 {
                     // await plc.Open();
                     plc.Open();
-                }
+                    C.log("McProtocol Opened Success");
+               }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
-
+                C.log("McProtocol Opened Failed : " + ex.ToString());
                 return false;
             }
 
@@ -63,7 +64,7 @@ namespace HermleCS.Comm
 
         public bool destroy()
         {
-            Console.WriteLine("Destroy..............");
+            C.log("McProtocol Destroy...");
 
             try
             {
@@ -71,7 +72,7 @@ namespace HermleCS.Comm
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                C.log("McProtocol Close Exception : " + ex.ToString());
                 return false;
             }
 
@@ -95,21 +96,21 @@ namespace HermleCS.Comm
                         // buffer += v.ToString() + ",";
                         buffer += v.ToString();
                     }
-                    Console.WriteLine($"ReadBlock Read Value = {buffer}");
+                    C.log($"ReadBlock Read Value = {buffer}");
                 }
                 else
                 {
                     errcode = C.ERRNO_CONNECT;
                     errmsg = "PLC Disconnected";
-                    Console.WriteLine("PLC Disconnected!!");
+                    C.log($"PLC Disconnected...");
                 }
-
             }
             catch (Exception ex)
             {
                 errcode = C.ERRNO_EXCEPTION;
                 errmsg = ex.Message;
-                Console.WriteLine(ex.ToString());
+
+                C.log("McProtocol Close Exception : " + ex.ToString());
             }
         }
 
@@ -139,43 +140,43 @@ namespace HermleCS.Comm
         /*
         private async void writeBlock(string deviceid, int length, )
         {
-            buffer = null;
-            errcode = 0;
-            int[] value = new int[length];
+        buffer = null;
+        errcode = 0;
+        int[] value = new int[length];
 
-            try
-            {
-                if (plc.Connected == true)
-                {
-                    await plc?.ReadDeviceBlock($"D{deviceid}", length, value);
+        try
+        {
+        if (plc.Connected == true)
+        {
+        await plc?.ReadDeviceBlock($"D{deviceid}", length, value);
 
-                    foreach (int v in value)
-                    {
-                        // buffer += v.ToString() + ",";
-                        buffer += v.ToString();
-                    }
-                    Console.WriteLine($"ReadBlock Read Value = {buffer}");
-                }
-                else
-                {
-                    errcode = C.ERRNO_CONNECT;
-                    errmsg = "PLC Disconnected";
-                    Console.WriteLine("PLC Disconnected!!");
-                }
+        foreach (int v in value)
+        {
+        // buffer += v.ToString() + ",";
+        buffer += v.ToString();
+        }
+        Console.WriteLine($"ReadBlock Read Value = {buffer}");
+        }
+        else
+        {
+        errcode = C.ERRNO_CONNECT;
+        errmsg = "PLC Disconnected";
+        Console.WriteLine("PLC Disconnected!!");
+        }
 
-            }
-            catch (Exception ex)
-            {
-                errcode = C.ERRNO_EXCEPTION;
-                errmsg = ex.Message;
-                Console.WriteLine(ex.ToString());
-            }
+        }
+        catch (Exception ex)
+        {
+        errcode = C.ERRNO_EXCEPTION;
+        errmsg = ex.Message;
+        Console.WriteLine(ex.ToString());
+        }
         }
         */
         public override bool sendMessage(string deviceid, int length, int[] val)
         {
             /*
-            Console.WriteLine("sendMessage..............");
+            C.log("sendMessage..............");
 
             int retCode;
 
@@ -189,6 +190,7 @@ namespace HermleCS.Comm
                 return false;
             }
             */
+
             return true;
         }
 
@@ -201,12 +203,12 @@ namespace HermleCS.Comm
             int value;
             try
             {
-                plc.GetDevice("D1010", out value);
-                ret = "Device Read : " + value;
+            plc.GetDevice("D1010", out value);
+            ret = "Device Read : " + value;
             }
             catch (Exception e)
             {
-                ret = e.Message;
+            ret = e.Message;
             }
 
             return ret;

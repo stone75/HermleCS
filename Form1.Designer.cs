@@ -31,6 +31,7 @@
             this.btnMXComponent = new System.Windows.Forms.Button();
             this.btnHTTPConnection = new System.Windows.Forms.Button();
             this.btnTCPComponent = new System.Windows.Forms.Button();
+            this.btnCSVTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnMXComponent
@@ -64,11 +65,22 @@
             this.btnTCPComponent.Text = "TCP Component 로 통신";
             this.btnTCPComponent.UseVisualStyleBackColor = true;
             // 
+            // btnCSVTest
+            // 
+            this.btnCSVTest.Location = new System.Drawing.Point(12, 304);
+            this.btnCSVTest.Name = "btnCSVTest";
+            this.btnCSVTest.Size = new System.Drawing.Size(215, 68);
+            this.btnCSVTest.TabIndex = 3;
+            this.btnCSVTest.Text = "CSV 테스트";
+            this.btnCSVTest.UseVisualStyleBackColor = true;
+            this.btnCSVTest.Click += new System.EventHandler(this.btnCSVTest_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(239, 283);
+            this.ClientSize = new System.Drawing.Size(239, 393);
+            this.Controls.Add(this.btnCSVTest);
             this.Controls.Add(this.btnTCPComponent);
             this.Controls.Add(this.btnHTTPConnection);
             this.Controls.Add(this.btnMXComponent);
@@ -83,6 +95,7 @@
         private System.Windows.Forms.Button btnMXComponent;
         private System.Windows.Forms.Button btnHTTPConnection;
         private System.Windows.Forms.Button btnTCPComponent;
+        private System.Windows.Forms.Button btnCSVTest;
     }
 }
 
