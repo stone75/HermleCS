@@ -15,9 +15,18 @@ namespace HermleCS.Comm
 
         public const int ERRNO_EXCEPTION = 500;
 
-        public const int SHELF_COUNT = 3;
-        public const int COLUMN_COUNT = 12;
-        public const int POCKET_COUNT = 8;
+        public const int DRILL_SHELF_COUNT = 3;
+        public const int DRILL_COLUMN_COUNT = 12;
+        public const int DRILL_POCKET_COUNT = 8;
+
+        public const int HSK_SHELF_COUNT = 3;
+        public const int HSK_COLUMN_COUNT = 12;
+        public const int HSK_POCKET_COUNT = 8;
+
+        public const int ROUND_SHELF_COUNT = 3;
+        public const int ROUND_COLUMN_COUNT = 12;
+        public const int ROUND_POCKET_COUNT = 8;
+
         public const int WORKPIECE_COUNT = 50;
 
         public static string ApplicationPath;

@@ -12,18 +12,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace HermleCS.Data
 {
-    public struct RobotPosition
+    public struct Locations
     {
         public string name;
         public double x, y, z, rx, ry, rz, dist, alfa;
     }
-
-    /*
-    public struct RoundLocations
-    {
-        public RobotPosition[] diameter;
-    }
-    */
 
     public enum PocketStatus
     {
