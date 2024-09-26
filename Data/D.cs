@@ -16,6 +16,7 @@ namespace HermleCS.Data
         private static readonly D instance = new D();
 
         public static RobotPosition[,,] roundlocations = new RobotPosition[C.SHELF_COUNT, C.COLUMN_COUNT, C.POCKET_COUNT];
+        public static RobotPosition[,,] HKSlocations = new RobotPosition[C.SHELF_COUNT, C.COLUMN_COUNT, C.POCKET_COUNT];
 
         /*
         public static PocketProperties[,] automationstatus = new PocketProperties[C.SHELF_COUNT, C.COLUMN_COUNT];
