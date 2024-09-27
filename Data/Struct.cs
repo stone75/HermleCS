@@ -14,9 +14,22 @@ namespace HermleCS.Data
 {
     public struct Locations
     {
-        public string name;
-        public double x, y, z, rx, ry, rz, dist, alfa;
+        public String name;
+        public double? x, y, z, rx, ry, rz, dist, alfa;
     }
+
+    public struct GeneralLocations
+    {
+        public String name;
+        public double? x, y, z, rx, ry, rz;
+    }
+
+    public struct Status
+    {
+        public String name;
+        public int? shelf, column, pocket, diameter, currenttool, status, workpiece, programnumber;
+    }
+
 
     public enum PocketStatus
     {

@@ -15,25 +15,41 @@ namespace HermleCS.Comm
 
         public const int ERRNO_EXCEPTION = 500;
 
-        public const int DRILL_SHELF_COUNT = 3;
-        public const int DRILL_COLUMN_COUNT = 12;
-        public const int DRILL_POCKET_COUNT = 8;
+        // DRILL CONSTANT
+        public const int DRILL_LOCATION_SHELF_COUNT = 3;
+        public const int DRILL_LOCATION_COLUMN_COUNT = 12;
+        public const int DRILL_LOCATION_POCKET_COUNT = 7;
+        public const int DRILL_GENLOCATION_COUNT = 127;
+        public const int DRILL_STATUS_SHELF_COUNT = 3;
+        public const int DRILL_STATUS_COLUMN_COUNT = 1;
+        public const int DRILL_STATUS_POCKET_COUNT = 12;
 
-        public const int HSK_SHELF_COUNT = 3;
-        public const int HSK_COLUMN_COUNT = 12;
-        public const int HSK_POCKET_COUNT = 8;
+        // HSK CONSTANT
+        public const int HSK_LOCATION_SHELF_COUNT = 3;
+        public const int HSK_LOCATION_COLUMN_COUNT = 2;
+        public const int HSK_LOCATION_POCKET_COUNT = 5;
+        public const int HSK_GENLOCATION_COUNT = 137;
+        public const int HSK_STATUS_SHELF_COUNT = 3;
+        public const int HSK_STATUS_COLUMN_COUNT = 1;
+        public const int HSK_STATUS_POCKET_COUNT = 10;
 
-        public const int ROUND_SHELF_COUNT = 3;
-        public const int ROUND_COLUMN_COUNT = 12;
-        public const int ROUND_POCKET_COUNT = 8;
+        // ROUND CONSTANT
+        public const int ROUND_LOCATION_SHELF_COUNT = 3;
+        public const int ROUND_LOCATION_COLUMN_COUNT = 12;
+        public const int ROUND_LOCATION_POCKET_COUNT = 8;
+        public const int ROUND_GENLOCATION_COUNT = 40;
+        public const int ROUND_STATUS_SHELF_COUNT = 3;
+        public const int ROUND_STATUS_COLUMN_COUNT = 1;
+        public const int ROUND_STATUS_POCKET_COUNT = 12;
+
 
         public const int WORKPIECE_COUNT = 50;
 
-        public static string ApplicationPath;
+        public static string ApplicationPath = "C:\\Users\\박병석\\source\\repos\\HermleCS";
 
         public static void log(string msg)
         {
-            Console.WriteLine(DateTime.Now + " : {msg}");
+            Console.WriteLine(DateTime.Now + " : " + msg);
         }
     }
 }

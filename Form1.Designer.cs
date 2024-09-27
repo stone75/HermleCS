@@ -91,7 +91,7 @@
         }
 
         #endregion
-
+        // Comment.
         private System.Windows.Forms.Button btnMXComponent;
         private System.Windows.Forms.Button btnHTTPConnection;
         private System.Windows.Forms.Button btnTCPComponent;

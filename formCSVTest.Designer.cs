@@ -33,7 +33,7 @@
             this.radioDrill = new System.Windows.Forms.RadioButton();
             this.radioHSK = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.rafioGeneral = new System.Windows.Forms.RadioButton();
+            this.radioGeneral = new System.Windows.Forms.RadioButton();
             this.radioLocations = new System.Windows.Forms.RadioButton();
             this.radioStatus = new System.Windows.Forms.RadioButton();
             this.btnLoad = new System.Windows.Forms.Button();
@@ -70,7 +70,6 @@
             // radioDrill
             // 
             this.radioDrill.AutoSize = true;
-            this.radioDrill.Enabled = false;
             this.radioDrill.Location = new System.Drawing.Point(20, 64);
             this.radioDrill.Name = "radioDrill";
             this.radioDrill.Size = new System.Drawing.Size(44, 16);
@@ -81,7 +80,6 @@
             // radioHSK
             // 
             this.radioHSK.AutoSize = true;
-            this.radioHSK.Enabled = false;
             this.radioHSK.Location = new System.Drawing.Point(20, 42);
             this.radioHSK.Name = "radioHSK";
             this.radioHSK.Size = new System.Drawing.Size(47, 16);
@@ -91,7 +89,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.rafioGeneral);
+            this.groupBox2.Controls.Add(this.radioGeneral);
             this.groupBox2.Controls.Add(this.radioLocations);
             this.groupBox2.Controls.Add(this.radioStatus);
             this.groupBox2.Location = new System.Drawing.Point(615, 135);
@@ -101,35 +99,35 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Location 정보";
             // 
-            // rafioGeneral
+            // radioGeneral
             // 
-            this.rafioGeneral.AutoSize = true;
-            this.rafioGeneral.Location = new System.Drawing.Point(20, 64);
-            this.rafioGeneral.Name = "rafioGeneral";
-            this.rafioGeneral.Size = new System.Drawing.Size(126, 16);
-            this.rafioGeneral.TabIndex = 3;
-            this.rafioGeneral.Text = "General Locations";
-            this.rafioGeneral.UseVisualStyleBackColor = true;
+            this.radioGeneral.AutoSize = true;
+            this.radioGeneral.Location = new System.Drawing.Point(20, 64);
+            this.radioGeneral.Name = "radioGeneral";
+            this.radioGeneral.Size = new System.Drawing.Size(126, 16);
+            this.radioGeneral.TabIndex = 3;
+            this.radioGeneral.Text = "General Locations";
+            this.radioGeneral.UseVisualStyleBackColor = true;
             // 
             // radioLocations
             // 
             this.radioLocations.AutoSize = true;
+            this.radioLocations.Checked = true;
             this.radioLocations.Location = new System.Drawing.Point(20, 42);
             this.radioLocations.Name = "radioLocations";
             this.radioLocations.Size = new System.Drawing.Size(78, 16);
             this.radioLocations.TabIndex = 2;
+            this.radioLocations.TabStop = true;
             this.radioLocations.Text = "Locations";
             this.radioLocations.UseVisualStyleBackColor = true;
             // 
             // radioStatus
             // 
             this.radioStatus.AutoSize = true;
-            this.radioStatus.Checked = true;
             this.radioStatus.Location = new System.Drawing.Point(20, 20);
             this.radioStatus.Name = "radioStatus";
             this.radioStatus.Size = new System.Drawing.Size(58, 16);
             this.radioStatus.TabIndex = 1;
-            this.radioStatus.TabStop = true;
             this.radioStatus.Text = "Status";
             this.radioStatus.UseVisualStyleBackColor = true;
             // 
@@ -158,6 +156,7 @@
             this.txtCSVContent.Location = new System.Drawing.Point(12, 12);
             this.txtCSVContent.Multiline = true;
             this.txtCSVContent.Name = "txtCSVContent";
+            this.txtCSVContent.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtCSVContent.Size = new System.Drawing.Size(575, 338);
             this.txtCSVContent.TabIndex = 5;
             this.txtCSVContent.Text = "CSV Content Here...";
@@ -190,7 +189,7 @@
         private System.Windows.Forms.RadioButton radioDrill;
         private System.Windows.Forms.RadioButton radioHSK;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton rafioGeneral;
+        private System.Windows.Forms.RadioButton radioGeneral;
         private System.Windows.Forms.RadioButton radioLocations;
         private System.Windows.Forms.RadioButton radioStatus;
         private System.Windows.Forms.Button btnLoad;

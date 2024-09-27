@@ -15,15 +15,18 @@ namespace HermleCS.Data
     {
         private static readonly D instance = new D();
 
-        public static Locations[,,] DrillLocations = new Locations[C.DRILL_SHELF_COUNT, C.DRILL_COLUMN_COUNT, C.DRILL_POCKET_COUNT];
-        public static Locations[,,] HSKLocations = new Locations[C.HSK_SHELF_COUNT, C.HSK_COLUMN_COUNT, C.HSK_POCKET_COUNT];
-        public static Locations[,,] RoundLocations = new Locations[C.ROUND_SHELF_COUNT, C.ROUND_COLUMN_COUNT, C.ROUND_POCKET_COUNT];
+        public Locations[,,] DrillLocations = new Locations[C.DRILL_LOCATION_SHELF_COUNT, C.DRILL_LOCATION_COLUMN_COUNT, C.DRILL_LOCATION_POCKET_COUNT];
+        public Locations[,,] HSKLocations = new Locations[C.HSK_LOCATION_SHELF_COUNT, C.HSK_LOCATION_COLUMN_COUNT, C.HSK_LOCATION_POCKET_COUNT];
+        public Locations[,,] RoundLocations = new Locations[C.ROUND_LOCATION_SHELF_COUNT, C.ROUND_LOCATION_COLUMN_COUNT, C.ROUND_LOCATION_POCKET_COUNT];
 
-        /*
-        public static PocketProperties[,] automationstatus = new PocketProperties[C.SHELF_COUNT, C.COLUMN_COUNT];
-        public static WorkPiece[] allwp = new WorkPiece[C.WORKPIECE_COUNT];
-        public static ToolType apptooltype;
-        */
+        public GeneralLocations[] DrillGeneralLocations = new GeneralLocations[C.DRILL_GENLOCATION_COUNT];
+        public GeneralLocations[] HSKGeneralLocations = new GeneralLocations[C.HSK_GENLOCATION_COUNT];
+        public GeneralLocations[] RoundGeneralLocations = new GeneralLocations[C.ROUND_GENLOCATION_COUNT];
+
+        public Status[,,] DrillStatus = new Status[C.DRILL_STATUS_SHELF_COUNT, C.DRILL_STATUS_COLUMN_COUNT, C.DRILL_STATUS_POCKET_COUNT];
+        public Status[,,] HSKStatus = new Status[C.HSK_STATUS_SHELF_COUNT, C.HSK_STATUS_COLUMN_COUNT, C.HSK_STATUS_POCKET_COUNT];
+        public Status[,,] RoundStatus = new Status[C.ROUND_STATUS_SHELF_COUNT, C.ROUND_STATUS_COLUMN_COUNT, C.ROUND_STATUS_POCKET_COUNT];
+
 
         private D() { }
 
@@ -35,44 +38,107 @@ namespace HermleCS.Data
             }
         }
 
-        /*
-        public void init()
-        {
-            int shelf, column, pocket;
 
-            for (shelf = 0; shelf <= C.SHELF_COUNT; shelf++)
+        public String getLocationValues(Locations[,,] locations)
+        {
+            String rval = "";
+
+            for (int i = 0; i < locations.GetLength(0); i++)
             {
-                for (column = 0; column <= C.COLUMN_COUNT; column++)
+                for (int j = 0; j < locations.GetLength(1); j++)
                 {
-                    for (pocket = 0; pocket <= C.POCKET_COUNT; pocket++)
+                    for (int k = 0; k < locations.GetLength(2); k++)
                     {
-                        Console.WriteLine("Init...");
-                        roundlocations[shelf, column, pocket] = new RobotPosition();
+                        rval += locations[i, j, k].name + ",";
+                        rval += locations[i, j, k].x + ",";
+                        rval += locations[i, j, k].y + ",";
+                        rval += locations[i, j, k].z + ",";
+                        rval += locations[i, j, k].rx + ",";
+                        rval += locations[i, j, k].ry + ",";
+                        rval += locations[i, j, k].rz + ",";
+                        rval += locations[i, j, k].dist + ",";
+                        rval += locations[i, j, k].alfa + "\r\n";
                     }
                 }
             }
+
+            return rval;
         }
-        */
+
+        public String getGeneralLocationValues(GeneralLocations[] locations)
+        {
+            String rval = "";
+
+            for (int i = 0; i < locations.GetLength(0); i++)
+            {
+                rval += locations[i].name + ",";
+                rval += locations[i].x + ",";
+                rval += locations[i].y + ",";
+                rval += locations[i].z + ",";
+                rval += locations[i].rx + ",";
+                rval += locations[i].ry + ",";
+                rval += locations[i].rz + "\r\n";
+            }
+
+            return rval;
+        }
+
+        public String getStatusValues(Status[,,] status)
+        {
+            String rval = "";
+
+            for (int i = 0; i < status.GetLength(0); i++)
+            {
+                for (int j = 0; j < status.GetLength(1); j++)
+                {
+                    for (int k = 0; k < status.GetLength(2); k++)
+                    {
+                        rval += status[i, j, k].name + ",";
+                        rval += status[i, j, k].shelf + ",";
+                        rval += status[i, j, k].column + ",";
+                        rval += status[i, j, k].pocket + ",";
+                        rval += status[i, j, k].diameter + ",";
+                        rval += status[i, j, k].currenttool + ",";
+                        rval += status[i, j, k].status + ",";
+                        rval += status[i, j, k].workpiece + ",";
+                        rval += status[i, j, k].programnumber + "\r\n";
+                    }
+                }
+            }
+
+            return rval;
+        }
+
 
         public int ReadLocations(String toolname)
         {
-            var target;
+            Locations[,,] target;
             String targetfile;
+            int shelf_count, column_count, pocket_count;
 
-            if ( toolname.Equals("DRILL") || toolname.Equals("drill") )
+            if (toolname.Equals("DRILL") || toolname.Equals("drill"))
             {
                 target = DrillLocations;
                 targetfile = "Drill";
+                shelf_count = C.DRILL_LOCATION_SHELF_COUNT;
+                column_count = C.DRILL_LOCATION_COLUMN_COUNT;
+                pocket_count = C.DRILL_LOCATION_POCKET_COUNT;
             }
             else if (toolname.Equals("HSK") || toolname.Equals("hsk"))
             {
                 target = HSKLocations;
                 targetfile = "HSK";
+                shelf_count = C.HSK_LOCATION_SHELF_COUNT;
+                column_count = C.HSK_LOCATION_COLUMN_COUNT;
+                pocket_count = C.HSK_LOCATION_POCKET_COUNT;
             }
             else if (toolname.Equals("ROUND") || toolname.Equals("round"))
             {
                 target = RoundLocations;
                 targetfile = "Round";
+                shelf_count = C.ROUND_LOCATION_SHELF_COUNT;
+                column_count = C.ROUND_LOCATION_COLUMN_COUNT;
+                pocket_count = C.ROUND_LOCATION_POCKET_COUNT;
             }
             else
             {
@@ -89,30 +155,30 @@ namespace HermleCS.Data
             try
             {
                 //                filePath = Path.Combine(C.ApplicationPath, "WorkDirectory", "Data", arrayname, ".csv");
-                filePath = Path.Combine(C.ApplicationPath, "CSV", targetfile, "Locations.csv");
+                filePath = Path.Combine(C.ApplicationPath, "CSV", targetfile + "Locations.csv");
 
                 using (StreamReader reader = new StreamReader(filePath))
                 {
                     // 헤더 읽기
                     dummy = reader.ReadLine();
 
-                    for (shelf = 0; shelf <= C.SHELF_COUNT; shelf++)
+                    for (shelf = 0; shelf < shelf_count; shelf++)
                     {
-                        for (column = 0; column <= C.COLUMN_COUNT; column++)
+                        for (column = 0; column < column_count; column++)
                         {
-                            for (pocket = 0; pocket <= C.POCKET_COUNT; pocket++)
+                            for (pocket = 0; pocket < pocket_count; pocket++)
                             {
                                 dummy = reader.ReadLine();
                                 string[] values = dummy.Split(',');
-                                target[shelf, column, pocket].name = values[0];
-                                target[shelf, column, pocket].x = double.Parse(values[1]);
-                                target[shelf, column, pocket].y = double.Parse(values[2]);
-                                target[shelf, column, pocket].z = double.Parse(values[3]);
-                                target[shelf, column, pocket].rx = double.Parse(values[4]);
-                                target[shelf, column, pocket].ry = double.Parse(values[5]);
-                                target[shelf, column, pocket].rx = double.Parse(values[6]);
-                                target[shelf, column, pocket].dist = double.Parse(values[7]);
-                                target[shelf, column, pocket].alfa = double.Parse(values[8]);
+                                target[shelf, column, pocket].name = values[0].Trim();
+                                target[shelf, column, pocket].x = double.Parse((values[1].Length > 0) ? values[1] : "0");
+                                target[shelf, column, pocket].y = double.Parse((values[2].Length > 0) ? values[2] : "0");
+                                target[shelf, column, pocket].z = double.Parse((values[3].Length > 0) ? values[3] : "0");
+                                target[shelf, column, pocket].rx = double.Parse((values[4].Length > 0) ? values[4] : "0");
+                                target[shelf, column, pocket].ry = double.Parse((values[5].Length > 0) ? values[5] : "0");
+                                target[shelf, column, pocket].rz = double.Parse((values[6].Length > 0) ? values[6] : "0");
+                                target[shelf, column, pocket].dist = double.Parse((values[7].Length > 0) ? values[7] : "0");
+                                target[shelf, column, pocket].alfa = double.Parse((values[8].Length > 0) ? values[8] : "0");
 
                                 lines++;
                             }
@@ -135,7 +201,7 @@ namespace HermleCS.Data
 
         public int WriteLocations(String toolname)
         {
-            var target;
+            Locations[,,] target;
             String targetfile;
             int shelf_count, column_count, pocket_count;
 
@@ -143,32 +209,31 @@ namespace HermleCS.Data
             {
                 target = DrillLocations;
                 targetfile = "Drill";
-                shelf_count = C.DRILL_SHELF_COUNT;
-                column_count = C.DRILL_COLUMN_COUNT;
-                pocket_count = C.DRILL_POCKET_COUNT;
+                shelf_count = C.DRILL_LOCATION_SHELF_COUNT;
+                column_count = C.DRILL_LOCATION_COLUMN_COUNT;
+                pocket_count = C.DRILL_LOCATION_POCKET_COUNT;
             }
             else if (toolname.Equals("HSK") || toolname.Equals("hsk"))
             {
                 target = HSKLocations;
                 targetfile = "HSK";
-                shelf_count = C.HSK_SHELF_COUNT;
-                column_count = C.HSK_COLUMN_COUNT;
-                pocket_count = C.HSK_POCKET_COUNT;
+                shelf_count = C.HSK_LOCATION_SHELF_COUNT;
+                column_count = C.HSK_LOCATION_COLUMN_COUNT;
+                pocket_count = C.HSK_LOCATION_POCKET_COUNT;
             }
             else if (toolname.Equals("ROUND") || toolname.Equals("round"))
             {
                 target = RoundLocations;
                 targetfile = "Round";
-                shelf_count = C.ROUND_SHELF_COUNT;
-                column_count = C.ROUND_COLUMN_COUNT;
-                pocket_count = C.ROUND_POCKET_COUNT;
+                shelf_count = C.ROUND_LOCATION_SHELF_COUNT;
+                column_count = C.ROUND_LOCATION_COLUMN_COUNT;
+                pocket_count = C.ROUND_LOCATION_POCKET_COUNT;
             }
             else
             {
                 return C.ERRNO_FAILED;
             }
 
-            String dummy;
             int shelf, column, pocket;
             String filePath;
             int lines = 0;
@@ -176,17 +241,17 @@ namespace HermleCS.Data
             try
             {
                 //                filePath = Path.Combine(C.ApplicationPath, "WorkDirectory", "Data", arrayname, ".csv");
-                filePath = Path.Combine(C.ApplicationPath, "CSV", targetfile, "Locations.csv");
+                filePath = Path.Combine(C.ApplicationPath, "CSV", targetfile + "Locations.csv");
 
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
                     writer.WriteLine("Pocket Name , x , y , z , Rx , Ry , Rz , Distance , Alfa");
 
-                    for (shelf = 0; shelf <= shelf_count; shelf++)
+                    for (shelf = 0; shelf < shelf_count; shelf++)
                     {
-                        for (column = 0; column <= column_count; column++)
+                        for (column = 0; column < column_count; column++)
                         {
-                            for (pocket = 0; pocket <= pocket_count; pocket++)
+                            for (pocket = 0; pocket < pocket_count; pocket++)
                             {
                                 var name = target[shelf, column, pocket].name;
                                 var x = target[shelf, column, pocket].x;
@@ -216,101 +281,313 @@ namespace HermleCS.Data
 
             return lines;
         }
-    }
 
-    public class RoundData
-    {
-        /*
-        public int SaveArray(string arrayname)
+        public int ReadGeneralLocations(String toolname)
         {
-            if (arrayname != "RoundLocations")
+            GeneralLocations[] target;
+            String targetfile;
+            int count;
+
+            if ( toolname.Equals("DRILL") || toolname.Equals("drill") )
+            {
+                target = DrillGeneralLocations;
+                targetfile = "Drill";
+                count = C.DRILL_GENLOCATION_COUNT;
+            }
+            else if (toolname.Equals("HSK") || toolname.Equals("hsk"))
+            {
+                target = HSKGeneralLocations;
+                targetfile = "HSK";
+                count = C.HSK_GENLOCATION_COUNT;
+            }
+            else if (toolname.Equals("ROUND") || toolname.Equals("round"))
+            {
+                target = RoundGeneralLocations;
+                targetfile = "Round";
+                count = C.ROUND_GENLOCATION_COUNT;
+            }
+            else
             {
                 return C.ERRNO_FAILED;
             }
 
-            int writeline = 0;
-            string CsvPath;
-            int shelf, column, pocket;
-            string filePath;
+            String dummy;
+            String filePath;
+            int lines = 0;
 
             try
             {
-                CsvPath = C.ApplicationPath + "\\WorkDirectory\\Data\\";
-                filePath = Path.Combine(CsvPath, arrayname + ".csv");
+                //                filePath = Path.Combine(C.ApplicationPath, "WorkDirectory", "Data", arrayname, ".csv");
+                filePath = Path.Combine(C.ApplicationPath, "CSV", targetfile + "GeneralLocations.csv");
+
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    // 헤더 읽기
+                    dummy = reader.ReadLine();
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        dummy = reader.ReadLine();
+                        string[] values = dummy.Split(',');
+                        target[i].name = values[0].Trim();
+                        target[i].x = double.Parse((values[1].Length > 0) ? values[1] : "0");
+                        target[i].y = double.Parse((values[2].Length > 0) ? values[2] : "0");
+                        target[i].z = double.Parse((values[3].Length > 0) ? values[3] : "0");
+                        target[i].rx = double.Parse((values[4].Length > 0) ? values[4] : "0");
+                        target[i].ry = double.Parse((values[5].Length > 0) ? values[5] : "0");
+                        target[i].rz = double.Parse((values[6].Length > 0) ? values[6] : "0");
+
+                        lines++;
+                    }
+
+                    C.log($"Reading General Locations : {lines}");
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                C.log("Read General Locations Exception ; " + ex.Message);
+                return C.ERRNO_FAILED;
+            }
+
+            return lines;
+        }
+
+
+        public int WriteGeneralLocations(String toolname)
+        {
+            GeneralLocations[] target;
+            String targetfile;
+
+            if (toolname.Equals("DRILL") || toolname.Equals("drill"))
+            {
+                target = DrillGeneralLocations;
+                targetfile = "Drill";
+            }
+            else if (toolname.Equals("HSK") || toolname.Equals("hsk"))
+            {
+                target = HSKGeneralLocations;
+                targetfile = "HSK";
+            }
+            else if (toolname.Equals("ROUND") || toolname.Equals("round"))
+            {
+                target = RoundGeneralLocations;
+                targetfile = "Round";
+            }
+            else
+            {
+                return C.ERRNO_FAILED;
+            }
+
+            String filePath;
+            int lines = 0;
+            int count = target.Length;
+
+            try
+            {
+                //                filePath = Path.Combine(C.ApplicationPath, "WorkDirectory", "Data", arrayname, ".csv");
+                filePath = Path.Combine(C.ApplicationPath, "CSV", targetfile + "GeneralLocations.csv");
 
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
-                    writer.WriteLine("Pocket Name,x,y,z,rx,ry,rz,distance,alfa");
+                    writer.WriteLine("General Location , x , y , z , Rx , Ry , Rz");
 
-                    for (shelf = 0; shelf <= C.SHELF_COUNT; shelf++)
+                    for (int i = 0; i < count; i++)
                     {
-                        for (column = 0; column <= C.COLUMN_COUNT; column++)
-                        {
-                            for (pocket = 0; pocket <= C.POCKET_COUNT; pocket++)
-                            {
-                                // RoundLocations의 데이터가 필요
-                                var location = roundlocations[shelf, column, pocket];
-                                writer.WriteLine($"{location.name},{location.x},{location.y},{location.z},{location.rx},{location.ry},{location.rz},{location.dist},{location.alfa}");
-                                writeline++;
-                            }
-                        }
+                        var name = target[i].name;
+                        var x = target[i].x;
+                        var y = target[i].y;
+                        var z = target[i].z;
+                        var rx = target[i].rx;
+                        var ry = target[i].ry;
+                        var rz = target[i].rz;
+                        writer.WriteLine($"{name} , {x} , {y} , {z} , {rx} , {ry} , {rz}");
+
+                        lines++;
                     }
+                    C.log($"Writer General Locations : {lines}");
                     writer.Flush();
                     writer.Close();
                 }
             }
             catch (Exception ex)
             {
-                C.log("SaveArray Fie Write Exception - " + ex.Message);
+                C.log("Write General Locations Exception ; " + ex.Message);
                 return C.ERRNO_FAILED;
             }
 
-            return writeline;
+            return lines;
         }
 
 
-        public int SaveAutomation()
+        public int ReadStatus(String toolname)
         {
-            int writeline = 0;
-            string CsvPath;
+            Status[,,] target;
+            String targetfile;
+            int shelf_count, column_count, pocket_count;
+
+            if (toolname.Equals("DRILL") || toolname.Equals("drill"))
+            {
+                target = DrillStatus;
+                targetfile = "Drill";
+                shelf_count = C.DRILL_STATUS_SHELF_COUNT;
+                column_count = C.DRILL_STATUS_COLUMN_COUNT;
+                pocket_count = C.DRILL_STATUS_POCKET_COUNT;
+            }
+            else if (toolname.Equals("HSK") || toolname.Equals("hsk"))
+            {
+                target = HSKStatus;
+                targetfile = "HSK";
+                shelf_count = C.HSK_STATUS_SHELF_COUNT;
+                column_count = C.HSK_STATUS_COLUMN_COUNT;
+                pocket_count = C.HSK_STATUS_POCKET_COUNT;
+            }
+            else if (toolname.Equals("ROUND") || toolname.Equals("round"))
+            {
+                target = RoundStatus;
+                targetfile = "Round";
+                shelf_count = C.ROUND_STATUS_SHELF_COUNT;
+                column_count = C.ROUND_STATUS_COLUMN_COUNT;
+                pocket_count = C.ROUND_STATUS_POCKET_COUNT;
+            }
+            else
+            {
+                return C.ERRNO_FAILED;
+            }
+
+            String dummy;
             int shelf, column, pocket;
-            string filePath;
+            String filePath;
+            int lines = 0;
 
             try
             {
-                CsvPath = C.ApplicationPath + "\\WorkDirectory\\Data\\";
-                filePath = Path.Combine(CsvPath, "RoundStatus.csv");
+                //                filePath = Path.Combine(C.ApplicationPath, "WorkDirectory", "Data", arrayname, ".csv");
+                filePath = Path.Combine(C.ApplicationPath, "CSV", targetfile + "Status.csv");
 
-                using (StreamWriter writer = new StreamWriter(filePath))
+                using (StreamReader reader = new StreamReader(filePath))
                 {
-                    writer.WriteLine("Pocket Name, shelf, column, pocket, diameter, CurrentTool, Status, WorkPiece, programNumber");
+                    // 헤더 읽기
+                    dummy = reader.ReadLine();
 
-                    for (shelf = 0; shelf <= C.SHELF_COUNT; shelf++)
+                    for (shelf = 0; shelf < shelf_count; shelf++)
                     {
-                        for (column = 0; column <= C.COLUMN_COUNT; column++)
+                        for (column = 0; column < column_count; column++)
                         {
-                            for (pocket = 0; pocket <= C.POCKET_COUNT; pocket++)
+                            for (pocket = 0; pocket < pocket_count; pocket++)
                             {
-                                // RoundLocations의 데이터가 필요
-                                var property = D.automationstatus[shelf, column];
-                                writer.WriteLine($"{property.name},{property.shelf},{property.column},{property.pocket},{property.diameter},{property.currenttool},{property.status},{property.workpiece},{property.programnumber}");
-                                writeline++;
+                                dummy = reader.ReadLine();
+                                string[] values = dummy.Split(',');
+                                target[shelf, column, pocket].name = values[0].Trim();
+                                target[shelf, column, pocket].shelf = int.Parse((values[1].Length > 0) ? values[1] : "0");
+                                target[shelf, column, pocket].column = int.Parse((values[2].Length > 0) ? values[2] : "0");
+                                target[shelf, column, pocket].pocket = int.Parse((values[3].Length > 0) ? values[3] : "0");
+                                target[shelf, column, pocket].diameter = int.Parse((values[4].Length > 0) ? values[4] : "0");
+                                target[shelf, column, pocket].currenttool = int.Parse((values[5].Length > 0) ? values[5] : "0");
+                                target[shelf, column, pocket].status = int.Parse((values[6].Length > 0) ? values[6] : "0");
+                                target[shelf, column, pocket].workpiece = int.Parse((values[7].Length > 0) ? values[7] : "0");
+                                target[shelf, column, pocket].programnumber = int.Parse((values[8].Length > 0) ? values[8] : "0");
+
+                                lines++;
                             }
                         }
                     }
+
+                    C.log($"Reading Status : {lines}");
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                C.log("Read Status Exception ; " + ex.Message);
+                return C.ERRNO_FAILED;
+            }
+
+            return lines;
+        }
+
+
+        public int WriteStatus(String toolname)
+        {
+            Status[,,] target;
+            String targetfile;
+            int shelf_count, column_count, pocket_count;
+
+            if (toolname.Equals("DRILL") || toolname.Equals("drill"))
+            {
+                target = DrillStatus;
+                targetfile = "Drill";
+                shelf_count = C.DRILL_STATUS_SHELF_COUNT;
+                column_count = C.DRILL_STATUS_COLUMN_COUNT;
+                pocket_count = C.DRILL_STATUS_POCKET_COUNT;
+            }
+            else if (toolname.Equals("HSK") || toolname.Equals("hsk"))
+            {
+                target = HSKStatus;
+                targetfile = "HSK";
+                shelf_count = C.HSK_STATUS_SHELF_COUNT;
+                column_count = C.HSK_STATUS_COLUMN_COUNT;
+                pocket_count = C.HSK_STATUS_POCKET_COUNT;
+            }
+            else if (toolname.Equals("ROUND") || toolname.Equals("round"))
+            {
+                target = RoundStatus;
+                targetfile = "Round";
+                shelf_count = C.ROUND_STATUS_SHELF_COUNT;
+                column_count = C.ROUND_STATUS_COLUMN_COUNT;
+                pocket_count = C.ROUND_STATUS_POCKET_COUNT;
+            }
+            else
+            {
+                return C.ERRNO_FAILED;
+            }
+
+            int shelf, column, pocket;
+            String filePath;
+            int lines = 0;
+
+            try
+            {
+                //                filePath = Path.Combine(C.ApplicationPath, "WorkDirectory", "Data", arrayname, ".csv");
+                filePath = Path.Combine(C.ApplicationPath, "CSV", targetfile + "Status.csv");
+
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    writer.WriteLine("Pocket Name , shelf , column , pocket , diameter , CurrentTool , Status , WorkPiece , programNumber");
+
+                    for (shelf = 0; shelf < shelf_count; shelf++)
+                    {
+                        for (column = 0; column < column_count; column++)
+                        {
+                            for (pocket = 0; pocket < pocket_count; pocket++)
+                            {
+                                var name = target[shelf, column, pocket].name;
+                                var x = target[shelf, column, pocket].shelf;
+                                var y = target[shelf, column, pocket].column;
+                                var z = target[shelf, column, pocket].pocket;
+                                var rx = target[shelf, column, pocket].diameter;
+                                var ry = target[shelf, column, pocket].currenttool;
+                                var rz = target[shelf, column, pocket].status;
+                                var dist = target[shelf, column, pocket].workpiece;
+                                var alfa = target[shelf, column, pocket].programnumber;
+                                writer.WriteLine($"{name} , {x} , {y} , {z} , {rx} , {ry} , {rz} , {dist}, {alfa}");
+
+                                lines++;
+                            }
+                        }
+                    }
+                    C.log($"Writer Status : {lines}");
                     writer.Flush();
                     writer.Close();
                 }
             }
             catch (Exception ex)
             {
-                C.log("SaveAutomation FileWrite Exception - " + ex.Message);
+                C.log("Write Status Exception ; " + ex.Message);
                 return C.ERRNO_FAILED;
             }
 
-            return writeline;
+            return lines;
         }
-
-        */
     }
 }
