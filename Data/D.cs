@@ -27,6 +27,7 @@ namespace HermleCS.Data
         public Status[,,] HSKStatus = new Status[C.HSK_STATUS_SHELF_COUNT, C.HSK_STATUS_COLUMN_COUNT, C.HSK_STATUS_POCKET_COUNT];
         public Status[,,] RoundStatus = new Status[C.ROUND_STATUS_SHELF_COUNT, C.ROUND_STATUS_COLUMN_COUNT, C.ROUND_STATUS_POCKET_COUNT];
 
+        public WorkPiece[] WorkPiecesList = new WorkPiece[C.WORKPIECE_COUNT];
 
         private D() { }
 
@@ -104,6 +105,24 @@ namespace HermleCS.Data
                         rval += status[i, j, k].programnumber + "\r\n";
                     }
                 }
+            }
+
+            return rval;
+        }
+
+        public String getWorkPiecesList(WorkPiece[] workpiece)
+        {
+            String rval = "";
+
+            for (int i = 0; i < WorkPiecesList.GetLength(0); i++)
+            {
+                rval += (i+1) ",";
+                rval += workpiece[i].wpnumber + ",";
+                rval += workpiece[i].ncprogram + ",";
+                rval += workpiece[i].toolamount + ",";
+                rval += workpiece[i].toolamountleft + ",";
+                rval += workpiece[i].tooldiameter + ",";
+                rval += workpiece[i].wptooltype + "\r\n";
             }
 
             return rval;
@@ -584,6 +603,100 @@ namespace HermleCS.Data
             catch (Exception ex)
             {
                 C.log("Write Status Exception ; " + ex.Message);
+                return C.ERRNO_FAILED;
+            }
+
+            return lines;
+        }
+
+        public int ReadWorkPieceList()
+        {
+            var target = WorkPiecesList;
+            String targetfile;
+            int count = C.WORKPIECE_COUNT;
+
+            String dummy;
+            String filePath;
+            int lines = 0;
+
+            try
+            {
+                //                filePath = Path.Combine(C.ApplicationPath, "WorkDirectory", "Data", arrayname, ".csv");
+                filePath = Path.Combine(C.ApplicationPath, "CSV", "ALLWorkPiece.csv");
+
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    // 헤더 읽기
+                    dummy = reader.ReadLine();
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        dummy = reader.ReadLine();
+                        string[] values = dummy.Split(',');
+                        int linenumber = int.Parse((values[0].Length > 0) ? values[0] : i);
+                        linenumber++;
+                        target[linenumber].wpnumber = int.Parse((values[1].Length > 0) ? values[1] : "0");
+                        target[linenumber].ncprogram = int.Parse((values[2].Length > 0) ? values[2] : "0");
+                        target[linenumber].toolamount = int.Parse((values[3].Length > 0) ? values[3] : "0");
+                        target[linenumber].toolamountleft = int.Parse((values[4].Length > 0) ? values[4] : "0");
+                        target[linenumber].tooldiameter = int.Parse((values[5].Length > 0) ? values[5] : "0");
+                        target[linenumber].wptooltype = values[6];
+
+                        lines++;
+                    }
+
+                    C.log($"Reading Work Piece : {lines}");
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                C.log("Read Work Piece Exception ; " + ex.Message);
+                return C.ERRNO_FAILED;
+            }
+
+            return lines;
+        }
+
+
+        public int WriteWorkPieceList()
+        {
+            WorkPiece[] target = WorkPiecesList;
+
+            String filePath;
+            int lines = 0;
+            int count = target.Length;
+
+            try
+            {
+                //                filePath = Path.Combine(C.ApplicationPath, "WorkDirectory", "Data", arrayname, ".csv");
+                filePath = Path.Combine(C.ApplicationPath, "CSV", "ALLWorkPiece.csv");
+
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    writer.WriteLine("Line Number , WorkPieceNumber , NCProgram , Tool Amount , ToolAmountLeft , ToolDiameter , WP ToolTypex");
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        var linenumber = i;
+                        var x = target[i].wpnumber;
+                        var y = target[i].ncprogram;
+                        var z = target[i].toolamount;
+                        var rx = target[i].toolamountleft;
+                        var ry = target[i].tooldiameter;
+                        var rz = target[i].wptooltype;
+                        writer.WriteLine($"{linenumber} , {x} , {y} , {z} , {rx} , {ry} , {rz}");
+
+                        lines++;
+                    }
+                    C.log($"Writer Work Piece : {lines}");
+                    writer.Flush();
+                    writer.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                C.log("Write Work Piece Exception ; " + ex.Message);
                 return C.ERRNO_FAILED;
             }
 
