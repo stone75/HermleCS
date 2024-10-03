@@ -55,6 +55,7 @@
     <Compile Include="Comm\CommHTTPComponent.cs" />
     <Compile Include="Comm\CommTCPComponent.cs" />
     <Compile Include="Data\D.cs" />
+    <Compile Include="Data\DrillCalculation.cs" />
     <Compile Include="Data\Struct.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

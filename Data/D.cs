@@ -116,7 +116,7 @@ namespace HermleCS.Data
 
             for (int i = 0; i < WorkPiecesList.GetLength(0); i++)
             {
-                rval += (i+1) ",";
+                rval += (i+1);
                 rval += workpiece[i].wpnumber + ",";
                 rval += workpiece[i].ncprogram + ",";
                 rval += workpiece[i].toolamount + ",";
@@ -633,7 +633,7 @@ namespace HermleCS.Data
                     {
                         dummy = reader.ReadLine();
                         string[] values = dummy.Split(',');
-                        int linenumber = int.Parse((values[0].Length > 0) ? values[0] : i);
+                        int linenumber = (values[0].Length > 0) ? int.Parse(values[0]) : i;
                         linenumber++;
                         target[linenumber].wpnumber = int.Parse((values[1].Length > 0) ? values[1] : "0");
                         target[linenumber].ncprogram = int.Parse((values[2].Length > 0) ? values[2] : "0");
