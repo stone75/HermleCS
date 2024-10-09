@@ -69,6 +69,12 @@
     <Compile Include="formCSVTest.Designer.cs">
       <DependentUpon>formCSVTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="formETC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formETC.Designer.cs">
+      <DependentUpon>formETC.cs</DependentUpon>
+    </Compile>
     <Compile Include="formHTTPComponent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formCSVTest.resx">
       <DependentUpon>formCSVTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formETC.resx">
+      <DependentUpon>formETC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formHTTPComponent.resx">
       <DependentUpon>formHTTPComponent.cs</DependentUpon>

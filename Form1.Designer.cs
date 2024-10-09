@@ -32,6 +32,7 @@
             this.btnHTTPConnection = new System.Windows.Forms.Button();
             this.btnTCPComponent = new System.Windows.Forms.Button();
             this.btnCSVTest = new System.Windows.Forms.Button();
+            this.btnETCTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnMXComponent
@@ -75,11 +76,22 @@
             this.btnCSVTest.UseVisualStyleBackColor = true;
             this.btnCSVTest.Click += new System.EventHandler(this.btnCSVTest_Click);
             // 
+            // btnETCTest
+            // 
+            this.btnETCTest.Location = new System.Drawing.Point(12, 405);
+            this.btnETCTest.Name = "btnETCTest";
+            this.btnETCTest.Size = new System.Drawing.Size(215, 68);
+            this.btnETCTest.TabIndex = 4;
+            this.btnETCTest.Text = "ETC 테스트";
+            this.btnETCTest.UseVisualStyleBackColor = true;
+            this.btnETCTest.Click += new System.EventHandler(this.btnETCTest_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(239, 393);
+            this.ClientSize = new System.Drawing.Size(239, 485);
+            this.Controls.Add(this.btnETCTest);
             this.Controls.Add(this.btnCSVTest);
             this.Controls.Add(this.btnTCPComponent);
             this.Controls.Add(this.btnHTTPConnection);
@@ -96,6 +108,7 @@
         private System.Windows.Forms.Button btnHTTPConnection;
         private System.Windows.Forms.Button btnTCPComponent;
         private System.Windows.Forms.Button btnCSVTest;
+        private System.Windows.Forms.Button btnETCTest;
     }
 }
 

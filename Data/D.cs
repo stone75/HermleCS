@@ -702,5 +702,22 @@ namespace HermleCS.Data
 
             return lines;
         }
+
+        public Locations getCurrentLocation()
+        {
+            Locations rVal = new Locations();
+
+            Random random = new Random();
+
+            // -100에서 100까지의 랜덤 값 생성
+            rVal.x = Math.Round((random.NextDouble() * 200) - 100, 3);
+            rVal.y = Math.Round((random.NextDouble() * 200) - 100, 3);
+            rVal.z = Math.Round((random.NextDouble() * 200) - 100, 3);
+            rVal.rx = Math.Round((random.NextDouble() * 200) - 100, 3);
+            rVal.ry = Math.Round((random.NextDouble() * 200) - 100, 3);
+            rVal.rz = Math.Round((random.NextDouble() * 200) - 100, 3);
+
+            return rVal;
+        }
     }
 }

@@ -34,5 +34,11 @@ namespace HermleCS
             formCSVTest frm = new formCSVTest();
             frm.ShowDialog();
         }
+
+        private void btnETCTest_Click(object sender, EventArgs e)
+        {
+            formETC frm = new formETC();
+            frm.ShowDialog();
+        }
     }
 }

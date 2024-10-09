@@ -411,7 +411,7 @@ namespace HermleCS.Data
                 R1 = data.DrillLocations[shelf, 0, 0].dist;
                 R12 = data.DrillLocations[shelf, C.DRILL_LOCATION_COLUMN_COUNT-1, 0].dist;
 
-                Tetta = Math.Acos((D * D - R1 * R1 - Rc(1) * Rc(1)) / (-2 * R1 * Rc(1))) / (2 * Math.PI) * 360;
+                Tetta = Math.Acos((g_d * g_d - R1 * R1 - g_RC[1] * g_RC[1]) / (-2 * R1 * g_RC[1])) / (2 * Math.PI) * 360;
                 CurrRad = Math.Sqrt(R1 * R1 + H * H - 2 * R1 * H * Math.Cos(Tetta / 360 * (2 * Math.PI)));
                 Omega = Math.Acos((H * H - R1 * R1 - CurrRad * CurrRad) / (-2 * R1 * CurrRad)) / (2 * Math.PI) * 360;
 
@@ -422,15 +422,15 @@ namespace HermleCS.Data
                 data.DrillLocations[shelf, 0, index].dist = CurrRad;
 
                 // sign
-                if (R1 < Rc(1) && R12 < Rc(1))
+                if (R1 < g_RC[1] && R12 < g_RC[1])
                 {
                     Sign = -1;
                 }
-                else if (R1 < Rc(1) && R12 > Rc(1))
+                else if (R1 < g_RC[1] && R12 > g_RC[1])
                 {
                     Sign = 1;
                 }
-                else if (R1 > Rc(1) && R12 < Rc(1))
+                else if (R1 > g_RC[1] && R12 < g_RC[1])
                 {
                     Sign = 1;
                 }
@@ -506,13 +506,13 @@ namespace HermleCS.Data
 
             for (jj = 0; jj < 12; jj++)
             {
-                s[jj] = 2 * Rc * Math.Sin(0.5 * (g_Gamma_c / (TotalDRILL - 1)) * (jj - 1) / 360 * (2 * Math.PI));
+                g_s[jj] = 2 * Rc * Math.Sin(0.5 * (g_gamma_c / (C.DRILL_STATUS_POCKET_COUNT - 1)) * (jj - 1) / 360 * (2 * Math.PI));
             }
 
             for (jj = 1; jj < 12; jj++)
             {
-                R[jj] = Math.Sqrt(D * D + Rc * Rc - 2 * D * Rc * Math.Cos(Lambda[jj] / 360 * (2 * Math.PI)));
-                Betta[jj] = Math.Acos((R1 * R1 + R[jj] * R[jj] - s[jj] * s[jj]) / (2 * R1 * R[jj])) / (2 * Math.PI) * 360;
+                R[jj] = Math.Sqrt(g_d * g_d + Rc * Rc - 2 * g_d * Rc * Math.Cos(g_lambda[jj] / 360 * (2 * Math.PI)));
+                Betta[jj] = Math.Acos((R1 * R1 + R[jj] * R[jj] - g_s[jj] * g_s[jj]) / (2 * R1 * R[jj])) / (2 * Math.PI) * 360;
             }
 
             // name 설정
@@ -567,7 +567,7 @@ namespace HermleCS.Data
                 {
                     data.DrillLocations[shelf, jj, Index].x = data.DrillLocations[shelf, jj, Index].dist * Math.Cos(data.DrillLocations[shelf, jj, Index].alfa * ((2 * Math.PI) / 360));
                 }
-                else if (data.DrillLocations[shelf, jj].diameter[1].alfa == -90)
+                else if (data.DrillLocations[shelf, jj, 0].alfa == -90)
                 {
                     data.DrillLocations[shelf, jj, Index].x = data.DrillLocations[shelf, jj, Index].dist;
                 }
@@ -595,7 +595,7 @@ namespace HermleCS.Data
             }
 
             // dRx 계산
-            dRx = Math.Abs(data.DrillLocations[shelf, 0, 0].rx - data.DrillLocations[shelf, 11, 0].rx) / (TotalDRILL - 1);
+            dRx = Math.Abs(data.DrillLocations[shelf, 0, 0].rx - data.DrillLocations[shelf, 11, 0].rx) / (C.DRILL_STATUS_POCKET_COUNT - 1);
 
             // Rx 계산
             if (data.DrillLocations[shelf, 11, 0].rx > data.DrillLocations[shelf, 0, 0].rx)
@@ -605,7 +605,7 @@ namespace HermleCS.Data
                     data.DrillLocations[shelf, jj, Index].rx = data.DrillLocations[shelf, jj - 1, Index].rx + dRx;
                 }
             }
-            else if (data.DrillLocations[shelf, 0, 0].rx > data.DrillLocations[shelf, 11, 0].Rx)
+            else if (data.DrillLocations[shelf, 0, 0].rx > data.DrillLocations[shelf, 11, 0].rx)
             {
                 for (jj = 1; jj < 12; jj++)
                 {
@@ -649,7 +649,7 @@ namespace HermleCS.Data
             // Tetta 계산
             for (jj = 1; jj < 12; jj++)
             {
-                Tetta[jj] = Math.Acos((-D * D + R[jj] * R[jj] + Rc * Rc) / (2 * R[jj] * Rc)) / (2 * Math.PI) * 360;
+                Tetta[jj] = Math.Acos((-g_d * g_d + R[jj] * R[jj] + Rc * Rc) / (2 * R[jj] * Rc)) / (2 * Math.PI) * 360;
             }
 
             // Tetta의 부호 계산
@@ -681,11 +681,174 @@ namespace HermleCS.Data
             // Rz 계산
             for (jj = 1; jj < 12; jj++)
             {
-                data.DrillLocations[shelf, jj, Index].rz = 180 - data.DrillLocations[shelf, 0, Index].alfa - Betta[jj] + Sign[jj] * Tetta[jj] + Sign_2 * D_Alfa;
+                data.DrillLocations[shelf, jj, Index].rz = 180 - data.DrillLocations[shelf, 0, Index].alfa - Betta[jj] + Sign[jj] * Tetta[jj] + Sign_2 * g_d_alfa;
             }
 
 //            SaveArray("DrillLocations");
         }
+
+
+        public void DrillCalc5thDiameter(int shelf, double Rc, double Delta)
+        {
+            double R5;
+            double MyAlfa;
+
+            // radius
+            R5 = Math.Sqrt(Math.Pow(g_d, 2) + Math.Pow(Rc, 2) - 2 * g_d * Rc * Math.Cos((Delta / 360) * 2 * Math.PI));
+            data.DrillLocations[shelf, 0, 4].dist = R5;
+
+            // alfa
+            MyAlfa = data.DrillLocations[shelf, 0, 0].alfa + 3.57;
+            data.DrillLocations[shelf, 0, 4].alfa = MyAlfa;
+
+            // name
+            data.DrillLocations[shelf, 0, 4].name = shelf.ToString() + "01." + 5.ToString();
+
+            // X
+            if (data.DrillLocations[shelf, 0, 4].alfa > -90)
+            {
+                data.DrillLocations[shelf, 0, 4].x =
+                    data.DrillLocations[shelf, 0, 4].dist *
+                    Math.Cos(data.DrillLocations[shelf, 0, 4].alfa * (2 * Math.PI / 360));
+            }
+            else if (data.DrillLocations[shelf, 0, 4].alfa == -90)
+            {
+                data.DrillLocations[shelf, 0, 4].x = data.DrillLocations[shelf, 0, 4].dist;
+            }
+            else if (data.DrillLocations[shelf, 0, 4].alfa < -90)
+            {
+                data.DrillLocations[shelf, 0, 4].x =
+                    -1 * data.DrillLocations[shelf, 0, 4].dist *
+                    Math.Cos((180 - data.DrillLocations[shelf, 0, 4].alfa) * (2 * Math.PI / 360));
+            }
+
+            // Y
+            if (data.DrillLocations[shelf, 0, 4].alfa < 90)
+            {
+                data.DrillLocations[shelf, 0, 4].y =
+                    -1 * data.DrillLocations[shelf, 0, 4].dist *
+                    Math.Sin(data.DrillLocations[shelf, 0, 4].alfa * (2 * Math.PI / 360));
+            }
+            else if (data.DrillLocations[shelf, 0, 4].alfa == 90)
+            {
+                data.DrillLocations[shelf, 0, 4].y = -1 * data.DrillLocations[shelf, 0, 4].dist;
+            }
+            else if (data.DrillLocations[shelf, 0, 4].alfa > 90)
+            {
+                data.DrillLocations[shelf, 0, 4].y =
+                    -1 * data.DrillLocations[shelf, 0, 4].dist *
+                    Math.Sin(data.DrillLocations[shelf, 0, 4].alfa * (2 * Math.PI / 360));
+            }
+
+            // Z
+            data.DrillLocations[shelf, 0, 4].z = data.DrillLocations[shelf, 0, 0].z;
+
+            // Rx
+            data.DrillLocations[shelf, 0, 4].rx = data.DrillLocations[shelf, 0, 0].rx;
+
+            // Ry
+            data.DrillLocations[shelf, 0, 4].ry = data.DrillLocations[shelf, 0, 0].ry;
+
+            // Rz
+            data.DrillLocations[shelf, 0, 4].rz = data.DrillLocations[shelf, 0, 0].rz - 3.57;
+
+            // Call SaveArray function
+//            SaveArray("DrillLocations");
+        }
+
+
+        public void DrillCalcDiameter_2(int shelf, int Index, double H)
+        {
+            double Tetta;
+            double R1;
+            double R12;
+            double CurrRad;
+            double Omega;
+            int Sign;
+
+            try
+            {
+                R1 = data.DrillLocations[shelf, 0, 4].dist;
+                R12 = data.DrillLocations[shelf, 11, 4].dist;
+
+                Tetta = Math.Acos((Math.Pow(g_d, 2) - Math.Pow(R1, 2) - Math.Pow(g_RC[4], 2)) / (-2 * R1 * g_RC[4])) / (2 * Math.PI) * 360;
+                CurrRad = Math.Sqrt(Math.Pow(R1, 2) + Math.Pow(H, 2) - 2 * R1 * H * Math.Cos(Tetta / 360 * 2 * Math.PI));
+                Omega = Math.Acos((Math.Pow(H, 2) - Math.Pow(R1, 2) - Math.Pow(CurrRad, 2)) / (-2 * R1 * CurrRad)) / (2 * Math.PI) * 360;
+
+                // name
+                data.DrillLocations[shelf, 0, Index].name = shelf.ToString() + "01." + Index.ToString();
+
+                // distance
+                data.DrillLocations[shelf, 0, Index].dist = CurrRad;
+
+                // sign
+                if ((R1 < g_RC[0]) && (R12 < g_RC[0]))
+                {
+                    Sign = -1;
+                }
+                else if ((R1 < g_RC[0]) && (R12 > g_RC[0]))
+                {
+                    Sign = 1;
+                }
+                else if ((R1 > g_RC[0]) && (R12 < g_RC[0]))
+                {
+                    Sign = 1;
+                }
+                else if ((R1 > g_RC[0]) && (R12 > g_RC[0]))
+                {
+                    Sign = -1;
+                }
+
+                // alfa
+                data.DrillLocations[shelf, 0, Index].alfa = data.DrillLocations[shelf, 0, 4].alfa + Omega;
+
+                // X
+                if (data.DrillLocations[shelf, 0, Index].alfa > -90)
+                {
+                    data.DrillLocations[shelf, 0, Index].x = data.DrillLocations[shelf, 0, Index].dist * Math.Cos(data.DrillLocations[shelf, 0, Index].alfa * ((2 * Math.PI) / 360));
+                }
+                else if (data.DrillLocations[shelf, 0, Index].alfa == -90)
+                {
+                    data.DrillLocations[shelf, 0, Index].x = data.DrillLocations[shelf, 0, Index].dist;
+                }
+                else if (data.DrillLocations[shelf, 0, Index].alfa < -90)
+                {
+                    data.DrillLocations[shelf, 0, Index].x = (-1) * data.DrillLocations[shelf, 0, Index].dist * Math.Cos((180 - data.DrillLocations[shelf, 0, Index].alfa) * ((2 * Math.PI) / 360));
+                }
+
+                // calculate the y coordinate
+                if (data.DrillLocations[shelf, 0, Index].alfa < 90)
+                {
+                    data.DrillLocations[shelf, 0, Index].y = -1 * data.DrillLocations[shelf, 0, Index].dist * Math.Sin(data.DrillLocations[shelf, 0, Index].alfa * ((2 * Math.PI) / 360));
+                }
+                else if (data.DrillLocations[shelf, 0, Index].alfa == 90)
+                {
+                    data.DrillLocations[shelf, 0, Index].y = -1 * data.DrillLocations[shelf, 0, Index].dist;
+                }
+                else if (data.DrillLocations[shelf, 0, Index].alfa > 90)
+                {
+                    data.DrillLocations[shelf, 0, Index].y = -1 * data.DrillLocations[shelf, 0, Index].dist * Math.Sin(data.DrillLocations[shelf, 0, Index].alfa * ((2 * Math.PI) / 360));
+                }
+
+                // Z
+                data.DrillLocations[shelf, 0, Index].z = data.DrillLocations[shelf, 0, 0].z;
+
+                // Rx
+                data.DrillLocations[shelf, 0, Index].rx = data.DrillLocations[shelf, 0, 0].rx;
+
+                // Ry
+                data.DrillLocations[shelf, 0, Index].ry = data.DrillLocations[shelf, 0, 0].ry;
+
+                // Rz
+                data.DrillLocations[shelf, 0, Index].rz = data.DrillLocations[shelf, 0, 4].rz;
+            }
+            catch (Exception ex)
+            {
+                // fdbk = MessageBox.Show("\nerror in DrillCalcDiameter() \n the error is: " + ex.Message, "DrillCalcDiameter", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                C.log("error in DrillCalcDiameter() \n the error is: " + ex.Message);
+            }
+        }
+
 
         public int DrillShelfCalculation(int shelf)
         {
