@@ -58,13 +58,13 @@
             // 
             // btnTCPComponent
             // 
-            this.btnTCPComponent.Enabled = false;
             this.btnTCPComponent.Location = new System.Drawing.Point(12, 108);
             this.btnTCPComponent.Name = "btnTCPComponent";
             this.btnTCPComponent.Size = new System.Drawing.Size(215, 63);
             this.btnTCPComponent.TabIndex = 2;
             this.btnTCPComponent.Text = "TCP Component 로 통신";
             this.btnTCPComponent.UseVisualStyleBackColor = true;
+            this.btnTCPComponent.Click += new System.EventHandler(this.btnTCPComponent_Click_1);
             // 
             // btnCSVTest
             // 

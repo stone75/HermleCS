@@ -40,5 +40,17 @@ namespace HermleCS
             formETC frm = new formETC();
             frm.ShowDialog();
         }
+
+        private void btnTCPComponent_Click(object sender, EventArgs e)
+        {
+            formTCPComponent frm = new formTCPComponent();
+            frm.ShowDialog();
+        }
+
+        private void btnTCPComponent_Click_1(object sender, EventArgs e)
+        {
+            formTCPComponent frm = new formTCPComponent();
+            frm.ShowDialog();
+        }
     }
 }

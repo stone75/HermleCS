@@ -87,6 +87,15 @@
     <Compile Include="formMXComponent.Designer.cs">
       <DependentUpon>formMXComponent.cs</DependentUpon>
     </Compile>
+    <Compile Include="formTCPComponent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formTCPComponent.Designer.cs">
+      <DependentUpon>formTCPComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plc\MelsecConfig.cs" />
+    <Compile Include="Plc\MelsecPlc.cs" />
+    <Compile Include="Plc\MelsecPlcData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -103,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formMXComponent.resx">
       <DependentUpon>formMXComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formTCPComponent.resx">
+      <DependentUpon>formTCPComponent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
