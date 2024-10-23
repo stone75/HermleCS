@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 using MCProtocol;
 
-
 namespace Raon.Lib.Plc
 {
     public class MelsecPlc : IDisposable

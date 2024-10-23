@@ -1,4 +1,4 @@
-﻿namespace $safeprojectname$
+﻿namespace HermleCS
 {
     partial class formCSVTest
     {

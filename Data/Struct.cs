@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 
-using $safeprojectname$.Comm;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
-
-namespace $safeprojectname$.Data
+namespace HermleCS.Data
 {
     public struct Locations
     {

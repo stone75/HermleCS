@@ -2,14 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-// using ActUtlTypeLib;
 using MCProtocol;
 
-namespace $safeprojectname$.Comm
+namespace HermleCS.Comm
 {
     public class CommTCPComponent : CommModule
     {
@@ -173,7 +170,7 @@ namespace $safeprojectname$.Comm
         }
         }
         */
-        public override bool sendMessage(string deviceid, int length, int[] val)
+    public override bool sendMessage(string deviceid, int length, int[] val)
         {
             /*
             C.log("sendMessage..............");

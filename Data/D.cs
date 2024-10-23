@@ -1,15 +1,8 @@
-﻿using $safeprojectname$.Comm;
+﻿using HermleCS.Comm;
 using System;
-using System.Collections.Generic;
-using System.Data.Common;
 using System.IO;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace $safeprojectname$.Data
+namespace HermleCS.Data
 {
     public class D
     {

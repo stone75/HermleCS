@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿// using ActUtlTypeLib;
 
-using ActUtlTypeLib;
-
-namespace $safeprojectname$.Comm
+namespace HermleCS.Comm
 {
+    /*
     public class CommMXComponent : CommModule
     {
+
         private static readonly CommMXComponent instance = new CommMXComponent();
         private CommMXComponent() { }
 
@@ -126,4 +121,5 @@ namespace $safeprojectname$.Comm
             return ret;
         }
     }
+    */
 }

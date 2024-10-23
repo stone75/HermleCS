@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace $safeprojectname$.Comm
+namespace HermleCS.Comm
 {
     internal class C
     {
@@ -45,7 +41,7 @@ namespace $safeprojectname$.Comm
 
         public const int WORKPIECE_COUNT = 50;
 
-        public static string ApplicationPath = "C:\\Users\\박병석\\source\\repos\\$safeprojectname$";
+        public static string ApplicationPath = "C:\\Users\\박병석\\source\\repos\\HermleCS";
 
         public static void log(string msg)
         {
