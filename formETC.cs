@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using HermleCS.Data;
+using $safeprojectname$.Data;
 
-namespace HermleCS
+namespace $safeprojectname$
 {
     public partial class formETC : Form
     {

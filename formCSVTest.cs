@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using HermleCS.Comm;
-using HermleCS.Data;
+using $safeprojectname$.Comm;
+using $safeprojectname$.Data;
 
-namespace HermleCS
+namespace $safeprojectname$
 {
     public partial class formCSVTest : Form
     {

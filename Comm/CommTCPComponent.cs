@@ -9,7 +9,7 @@ using System.Windows.Forms;
 // using ActUtlTypeLib;
 using MCProtocol;
 
-namespace HermleCS.Comm
+namespace $safeprojectname$.Comm
 {
     public class CommTCPComponent : CommModule
     {

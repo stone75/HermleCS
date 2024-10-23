@@ -1,4 +1,4 @@
-﻿namespace HermleCS
+﻿namespace $safeprojectname$
 {
     partial class formTCPComponent
     {

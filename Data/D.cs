@@ -1,4 +1,4 @@
-﻿using HermleCS.Comm;
+﻿using $safeprojectname$.Comm;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HermleCS.Data
+namespace $safeprojectname$.Data
 {
     public class D
     {

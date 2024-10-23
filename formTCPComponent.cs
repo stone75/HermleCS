@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 using Raon.Lib.Plc;
 
-namespace HermleCS
+namespace $safeprojectname$
 {
     public partial class formTCPComponent : Form
     {

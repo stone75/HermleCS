@@ -7,10 +7,10 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
-using HermleCS.Comm;
+using $safeprojectname$.Comm;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
-namespace HermleCS.Data
+namespace $safeprojectname$.Data
 {
     public struct Locations
     {

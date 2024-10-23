@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HermleCS.Comm;
+using $safeprojectname$.Comm;
 
-namespace HermleCS.Data
+namespace $safeprojectname$.Data
 {
     internal class DrillCalculation
     {

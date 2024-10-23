@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 using ActUtlTypeLib;
 
-namespace HermleCS.Comm
+namespace $safeprojectname$.Comm
 {
     public class CommMXComponent : CommModule
     {

@@ -11,7 +11,7 @@ using System.Web;
 // using ActUtlTypeLib;
 // using MCProtocol;
 
-namespace HermleCS.Comm
+namespace $safeprojectname$.Comm
 {
     public class CommHTTPComponent : CommModule
     {

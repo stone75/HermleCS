@@ -1,0 +1,65 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>HermleCS</Name>
+    <Description>&lt;사용할 수 있는 설명 없음&gt;</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>HermleCS</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="HermleCS.csproj" File="HermleCS.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="App.config">App.config</ProjectItem>
+      <Folder Name="Comm" TargetFolderName="Comm">
+        <ProjectItem ReplaceParameters="true" TargetFileName="C.cs">C.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="CommHTTPComponent.cs">CommHTTPComponent.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="CommModule.cs">CommModule.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="CommMXComponent.cs">CommMXComponent.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="CommTCPComponent.cs">CommTCPComponent.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Data" TargetFolderName="Data">
+        <ProjectItem ReplaceParameters="true" TargetFileName="D.cs">D.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DrillCalculation.cs">DrillCalculation.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Struct.cs">Struct.cs</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Form1.cs">Form1.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Form1.Designer.cs">Form1.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Form1.resx">Form1.resx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formCSVTest.cs">formCSVTest.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formCSVTest.Designer.cs">formCSVTest.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formCSVTest.resx">formCSVTest.resx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formETC.cs">formETC.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formETC.Designer.cs">formETC.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formETC.resx">formETC.resx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formHTTPComponent.cs">formHTTPComponent.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formHTTPComponent.Designer.cs">formHTTPComponent.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formHTTPComponent.resx">formHTTPComponent.resx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formMXComponent.cs">formMXComponent.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formMXComponent.Designer.cs">formMXComponent.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formMXComponent.resx">formMXComponent.resx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formTCPComponent.cs">formTCPComponent.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formTCPComponent.Designer.cs">formTCPComponent.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="formTCPComponent.resx">formTCPComponent.resx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="packages.config">packages.config</ProjectItem>
+      <Folder Name="Plc" TargetFolderName="Plc">
+        <ProjectItem ReplaceParameters="true" TargetFileName="MelsecConfig.cs">MelsecConfig.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="MelsecPlc.cs">MelsecPlc.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="MelsecPlcData.cs">MelsecPlcData.cs</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Program.cs">Program.cs</ProjectItem>
+      <Folder Name="Properties" TargetFolderName="Properties">
+        <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.resx">Resources.resx</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Settings.settings">Settings.settings</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Settings.Designer.cs">Settings.Designer.cs</ProjectItem>
+      </Folder>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

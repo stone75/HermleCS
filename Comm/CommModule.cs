@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HermleCS.Comm
+namespace $safeprojectname$.Comm
 {
     public abstract class CommModule
     {
