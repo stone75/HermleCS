@@ -7,7 +7,8 @@ using System.Net.Http;
 
 namespace HermleCS.Comm
 {
-    public class CommHTTPComponent : CommModule
+//    public class CommHTTPComponent : CommModule
+    public class CommHTTPComponent
     {
         private string IP;
         private int Port;
@@ -45,7 +46,7 @@ namespace HermleCS.Comm
             catch (Exception ex)
             {
                 // 예외 처리
-                Console.WriteLine($"Error occurred: {ex.Message}");
+                C.log($"Error occurred: {ex.Message}");
                 return null;
             }
         }
@@ -56,83 +57,52 @@ namespace HermleCS.Comm
 
             try
             {
-                /*
-                                StringContent content = new StringContent(
-                                System.json .Json.JsonSerializer.Serialize (jsonData),
-                                Encoding.UTF8,
-                                "application/json");
-                */
                 StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = httpClient.PostAsync(url, content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     rval = response.Content.ReadAsStringAsync().Result;
-                    Console.WriteLine($"응답 성공: {rval}");
+                    C.log($"응답 성공: {rval}");
                 } else
                 {
-                    Console.WriteLine($"응답 실패: {response.StatusCode}");
+                    C.log($"응답 실패: {response.StatusCode}");
                 }
             }
             catch (Exception ex)
             {
                 // 예외 처리
-                Console.WriteLine($"요청 중 오류 발생: {ex.Message}");
+                C.log($"요청 중 오류 발생: {ex.Message}");
                 return null;
             }
 
             return rval;
         }
 
-        public override bool readMessage(string deviceid, int length, out string readVal)
-        {
-            C.log("HTTP Connection - readMessage : ");
-            readVal = "";
 
+        public bool commandAutoStart(string jsondata)
+        {
+            PostAPI("AUTO_START", jsondata);
             return true;
         }
 
-        public override bool sendMessage(string deviceid, int length, int[] val)
+        public bool commandWritePosition(string jsondata)
         {
-            /*
-            Console.WriteLine("sendMessage..............");
-
-            int retCode;
-
-            try
-            {
-                retCode = plc.WriteDeviceRandom2(deviceid, 1, ref val);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return false;
-            }
-            */
+            PostAPI("WRITE_POSITION", jsondata);
             return true;
         }
 
-        public override string test()
+        public bool commandMove(string jsondata)
         {
-            /*
-            Console.WriteLine("Comm Module Test..........");
-
-            string ret;
-            int value;
-            try
-            {
-                plc.GetDevice("D1010", out value);
-                ret = "Device Read : " + value;
-            }
-            catch (Exception e)
-            {
-                ret = e.Message;
-            }
-
-            return ret;
-            */
-
-            return "";
+            PostAPI("MOVE", jsondata);
+            return true;
         }
+
+        public bool commandCommand(string TPFilename)
+        {
+            GetAPI("MOVE", jsondata);
+            return true;
+        }
+
     }
 }
